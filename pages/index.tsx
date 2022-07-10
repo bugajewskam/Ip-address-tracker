@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { Data } from "../data/itnerface";
@@ -33,55 +33,90 @@ const firstData = {
   },
   isp: "Google LLC",
 };
-export default function Home() {
-  const MapWithNoSSR = dynamic(() => import("../component/Map"), {
-    ssr: false,
-  });
 
+export async function getServerSideProps(context: any) {
+  let ip;
+
+  const { req } = context;
+
+  if (req.headers["x-forwarded-for"]) {
+    ip = req.headers["x-forwarded-for"].split(",")[0];
+  } else {
+    ip = req.connection.remoteAddress;
+  }
+  return {
+    props: {
+      ip,
+    },
+  };
+}
+
+export default function Home({ ip }: any) {
   const [ipAddress, setIpAddress] = useState("8.8.8.8");
   const [location, setLocation] = useState<Data>(firstData);
-  // useEffect(() => {
-  //   getData(ipAddress).then((result) => setLocation(result));
-  // }, [ipAddress]);
-  const lat = location?.location.lat;
   const city = location.location.city;
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     getData(ipAddress).then((result) => setLocation(result));
   };
-  console.log(ipAddress);
+
+  useEffect(() => {
+    if (ip != "::1") {
+      setIpAddress(ip);
+      getData(ip).then((result) => setLocation(result));
+    }
+  }, [ip]);
+
+  const MapWithNoSSR = useMemo(
+    () =>
+      dynamic(() => import("../component/Map"), {
+        ssr: false,
+      }),
+    [location]
+  );
   return (
     <main>
-       <div className="background">
-      <div id="map">
-        <MapWithNoSSR location={location} />
+      <div className="background">
+        <div id="map">
+          <MapWithNoSSR
+            location={[location.location.lat, location.location.lng]}
+          />
+        </div>
       </div>
-     </div>
       <h4>IP ADDRESS TRACKER</h4>
       <div className="form">
         <form onSubmit={handleSubmit}>
           <div className="submit">
             <input
-            value={ipAddress}
-            onChange={(e: any) => setIpAddress(e.target.value)}
-          />
-          <button type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-              <path d="M6 40V8l38 16Zm3-4.65L36.2 24 9 12.5v8.4L21.1 24 9 27Zm0 0V12.5 27Z" />
-            </svg>
-          
-          </button>
+              value={ipAddress}
+              onChange={(e: any) => setIpAddress(e.target.value)}
+            />
+            <button type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                <path d="M6 40V8l38 16Zm3-4.65L36.2 24 9 12.5v8.4L21.1 24 9 27Zm0 0V12.5 27Z" />
+              </svg>
+            </button>
           </div>
         </form>
       </div>
 
       <div className="data">
-        <div className="item"><h5>IP ADDRES</h5>{location.ip}</div>
         <div className="item">
-        <h5>LOCATION</h5>{city},{location.location.region},{location.location.postalCode}
+          <h5>IP ADDRES</h5>
+          {location.ip}
         </div>
-        <div className="item"><h5>TIMEZONE</h5>UTC {location.location.timezone}</div>
-        <div className="item"><h5>ISP</h5>{location.isp}</div>
+        <div className="item">
+          <h5>LOCATION</h5>
+          {city},{location.location.region},{location.location.postalCode}
+        </div>
+        <div className="item">
+          <h5>TIMEZONE</h5>UTC {location.location.timezone}
+        </div>
+        <div className="item">
+          <h5>ISP</h5>
+          {location.isp}
+        </div>
       </div>
     </main>
   );
