@@ -15,8 +15,8 @@ a {
   box-sizing: border-box;
 }
 .mapDiv {
-  position:absolute;
-  top:250px;
+  position: absolute;
+  top: 250px;
   z-index: -1;
   height: 600px;
 }
@@ -27,16 +27,16 @@ a {
 .leaflet-container {
   height: 100%;
 }
-h5{
+h5 {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   text-decoration: solid;
-  color:rgb(168, 165, 165)
+  color: rgb(168, 165, 165);
 }
+
 .data {
-  
   display: flex;
   width: 800px;
   background-color: white;
@@ -48,49 +48,46 @@ h5{
   margin: auto;
   align-content: center;
   padding-bottom: 10px;
-  
 }
-.item{
-
+.item {
   padding-left: 10px;
   padding-right: 10px;
   width: 170px;
   display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-align-content: center;
-text-align: start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
 }
 /* .data>div + .item{ */
-  /* margin-left: 10px; */
-  /* border-left: solid 1px rgb(81, 77, 77); */
+/* margin-left: 10px; */
+/* border-left: solid 1px rgb(81, 77, 77); */
 /* } */
-.form{
+.form {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
-input{
+input {
   background-color: white;
   border-radius: 8px 0px 0px 8px;
   width: 350px;
   margin-left: 0px;
   font-size: large;
 }
-.submit{
+.submit {
   display: flex;
-  gap:0;
+  gap: 0;
   width: 400px;
   transform: scale(0.75);
 }
-button{
+button {
   border-radius: 0px 8px 8px 0px;
-  fill:antiquewhite;
+  fill: antiquewhite;
   background-color: rgb(41, 39, 39);
-
 }
 .background {
   position: absolute;
@@ -106,4 +103,16 @@ h4 {
   display: flex;
   justify-content: center;
   color: antiquewhite;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+@media only screen and (max-width: 400px) {
+  .data {
+    flex-direction: column;
+    width: 300px;
+  }
+  .input {
+    width: 300px;
+  }
 }

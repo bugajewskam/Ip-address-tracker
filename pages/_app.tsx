@@ -7,7 +7,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Interactive Maps</title>
         <link
           rel="stylesheet"
@@ -15,6 +14,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
           crossOrigin=""
         />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="ie=edge"></meta>
       </Head>
 
       <Script

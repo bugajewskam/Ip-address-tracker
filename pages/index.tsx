@@ -76,48 +76,46 @@ export default function Home({ ip }: any) {
     [location]
   );
   return (
-    <main>
-      <div className="background">
-        <div id="map">
-          <MapWithNoSSR
-            location={[location.location.lat, location.location.lng]}
-          />
-        </div>
-      </div>
-      <h4>IP ADDRESS TRACKER</h4>
-      <div className="form">
-        <form onSubmit={handleSubmit}>
-          <div className="submit">
-            <input
-              value={ipAddress}
-              onChange={(e: any) => setIpAddress(e.target.value)}
-            />
-            <button type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-                <path d="M6 40V8l38 16Zm3-4.65L36.2 24 9 12.5v8.4L21.1 24 9 27Zm0 0V12.5 27Z" />
-              </svg>
-            </button>
+<main>
+        <div className="background">
+          <div id="map">
+            <MapWithNoSSR
+              location={[location.location.lat, location.location.lng]} />
           </div>
-        </form>
-      </div>
+        </div>
+        <h4>IP ADDRESS TRACKER</h4>
+        <div className="form">
+          <form onSubmit={handleSubmit}>
+            <div className="submit">
+              <input
+                value={ipAddress}
+                onChange={(e: any) => setIpAddress(e.target.value)} />
+              <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                  <path d="M6 40V8l38 16Zm3-4.65L36.2 24 9 12.5v8.4L21.1 24 9 27Zm0 0V12.5 27Z" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
 
-      <div className="data">
-        <div className="item">
-          <h5>IP ADDRES</h5>
-          {location.ip}
+        <div className="data">
+          <div className="item">
+            <h5>IP ADDRES</h5>
+            {location.ip}
+          </div>
+          <div className="item">
+            <h5>LOCATION</h5>
+            {city},{location.location.region},{location.location.postalCode}
+          </div>
+          <div className="item">
+            <h5>TIMEZONE</h5>UTC {location.location.timezone}
+          </div>
+          <div className="item">
+            <h5>ISP</h5>
+            {location.isp}
+          </div>
         </div>
-        <div className="item">
-          <h5>LOCATION</h5>
-          {city},{location.location.region},{location.location.postalCode}
-        </div>
-        <div className="item">
-          <h5>TIMEZONE</h5>UTC {location.location.timezone}
-        </div>
-        <div className="item">
-          <h5>ISP</h5>
-          {location.isp}
-        </div>
-      </div>
-    </main>
+      </main>
   );
 }
