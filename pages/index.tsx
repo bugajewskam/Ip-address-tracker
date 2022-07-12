@@ -102,18 +102,19 @@ export default function Home({ ip }: any) {
         <div className="data">
           <div className="item">
             <h5>IP ADDRES</h5>
-            {location.ip}
+            <p>{location.ip}</p>
           </div>
           <div className="item">
             <h5>LOCATION</h5>
-            {city},{location.location.region},{location.location.postalCode}
+            <p>{city},{location.location.region},{location.location.postalCode}</p>
           </div>
           <div className="item">
-            <h5>TIMEZONE</h5>UTC {location.location.timezone}
+            <h5>TIMEZONE</h5>
+            <p>UTC {location.location.timezone}</p>
           </div>
           <div className="item">
             <h5>ISP</h5>
-            {location.isp}
+            <p>{location.isp}</p>
           </div>
         </div>
       </main>

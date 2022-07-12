@@ -28,6 +28,7 @@ a {
   height: 100%;
 }
 h5 {
+  margin-bottom:5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,24 +48,28 @@ h5 {
   align-items: baseline;
   margin: auto;
   align-content: center;
-  padding-bottom: 10px;
+padding: 20px;
+  align-items: stretch;
+}
+p{
+  display: flex;
+  align-content: flex-start;
+  justify-content: left;
+  margin-top: 0px;
+  text-align: left;
 }
 .item {
   padding-left: 10px;
-  padding-right: 10px;
-  width: 170px;
+  width: 180px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  justify-content: flex-start;
   text-align: center;
 }
-/* .data>div + .item{ */
-/* margin-left: 10px; */
-/* border-left: solid 1px rgb(81, 77, 77); */
-/* } */
+.item + .item {
+  border-left: solid 2px rgb(168, 165, 165);
+}
 .form {
   display: flex;
   justify-content: center;
@@ -114,5 +119,9 @@ h4 {
   }
   .input {
     width: 300px;
+  }
+  .item + .item{
+    border-left: none;
+    border-top: solid 2px  rgb(168, 165, 165);
   }
 }
